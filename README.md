@@ -39,8 +39,8 @@ The tidy data set was created in 3 steps.
  - Filter the columns to only contain subject, activity and any feature columns containing 'mean(' or 'std('
  - Rename the columns (sourced originally from features.txt) to be more descriptive using the following rules:
    - Call make.names() on them to remove invalid characters.
-   - Convert one or more dots to a single space.
-   - Remove any trailing spaces.
+   - Convert one or more dots to a single dot.
+   - Remove any trailing dots.
    - Rename std to sd.
    - Rename Acc to Accelerometer.
    - Rename Gyro to Gyroscope.
@@ -53,9 +53,12 @@ The tidy data set was created in 3 steps.
 
 ## Assumptions:
 
+- A wide tidy data set was chosen to be ideal, with a row for each subject and activity combination and the mean of each feature as a separate column or variable.
 - The assignment's requirement to extract only means and standard deviations of measurements was interpreted to be any feature containing the string 'mean(' or 'std('.  This results in 66 features or variables.
 - The subject, X and Y files in the test and train directories are sufficient.  The data in Inertial Signals subdirectories was not used.
 - Appropriately labeling the data set with descriptive variable names was interpreted as:
-  - Remove all punctuation (and replace with spaces).
+  - Remove all invalid punctuation (using make.names()).
+  - Replace multiple periods with a single period and remove trailing periods.
   - Expand shortened words to make them clearer.
   - Replace BodyBody to Body as it seemed to be a typo.
+  - Replace std with sd to indicate standard deviation.

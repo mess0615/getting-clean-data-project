@@ -37,8 +37,8 @@ filterAndRenameColumns <- function(df) {
     ## We also rename the columns to have more descriptive names.
     filteredDF <- df[, grepl(pattern='subject|activity|mean\\(|std\\(', x=colnames(df))]
     cols <- make.names(colnames(filteredDF))
-    cols <- gsub(pattern='\\.+', replacement=' ', x=cols)
-    cols <- sub(pattern='\\s+$', replacement='', x = cols)
+    cols <- gsub(pattern='\\.+', replacement='.', x=cols)
+    cols <- sub(pattern='\\.+$', replacement='', x = cols)
     cols <- gsub(pattern='std', replacement='sd', x=cols)
     cols <- gsub(pattern='Acc', replacement='Accelerometer', x=cols)
     cols <- gsub(pattern='Gyro', replacement='Gyroscope', x=cols)
@@ -52,6 +52,6 @@ summarizeData <- function(df) {
     ## 'df' is a data.frame which we wish to summarize.
     grouped <- select(df, subject, activity)
     data <- select(df, -subject, -activity)
-    colnames(data) <- lapply(colnames(data), function(x) paste('mean of', x, sep=' '))
+    colnames(data) <- lapply(colnames(data), function(x) paste('mean.of', x, sep='.'))
     summaryDF <- cbind(grouped, data) %>% group_by(subject, activity) %>% summarise_each(funs(mean))
 }
