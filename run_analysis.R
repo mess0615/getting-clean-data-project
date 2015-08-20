@@ -54,4 +54,6 @@ summarizeData <- function(df) {
     data <- select(df, -subject, -activity)
     colnames(data) <- lapply(colnames(data), function(x) paste('mean.of', x, sep='.'))
     summaryDF <- cbind(grouped, data) %>% group_by(subject, activity) %>% summarise_each(funs(mean))
+    ## Return raw data.frame instead of a grouped_df.
+    as.data.frame(summaryDF)
 }
