@@ -1,7 +1,8 @@
+library(dplyr)
+
 runAnalysis <- function(directory='.') {
     ## 'directory' is a character vector of length 1 indicating
     ## the root directory of the data files
-    
     combinedDF <- combineData(directory)
     filteredDF <- filterAndRenameColumns(combinedDF)
     summaryDF <- summarizeData(filteredDF)
